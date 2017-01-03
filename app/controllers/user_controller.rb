@@ -1,36 +1,5 @@
 class UserController < ApplicationController
 
-  get '/users/:slug' do
-    # binding.pry
-    @user = User.find_by_slug(params[:slug])
-    erb :'/users/users'
-  end
-
-  post '/users/:id/edit' do
-    @user = User.find_by_id(params[:id])
-    if is_logged_in?(session) && @user.id == current_user.id
-      erb :'/users/edit'
-    elsif is_logged_in?(session) && @user.id != current_user.id
-    flash[:error] = "This is not your profile to edit"
-    redirect '/posts'
-    else
-      flash[:error] = "Please log in"
-      redirect '/login'
-    end
-  end
-
-  patch '/users/:id' do
-    user = User.find_by_id(params[:id])
-    if params[:user_photo] != ""
-      user.update(user_photo: params[:user_photo])
-      flash[:success] = "Profile photo successfully updated!"
-      redirect "/users/#{user.id}"
-    else
-      flash[:error] = "Your profile did not update correctly"
-      redirect "/users/#{user.id}/edit"
-    end
-  end
-
   get '/login' do
     if !is_logged_in?(session)
       erb :'/users/login'
@@ -74,6 +43,56 @@ class UserController < ApplicationController
     session.clear
     flash[:success] = "See you next time!"
     redirect '/login'
+  end
+
+  get '/users/:id' do
+    # binding.pry
+    @user = User.find_by_id(params[:id])
+    if @user && @user == current_user
+      erb :'/users/users'
+    else
+      redirect '/signup'
+    end
+
+  end
+
+  get '/users/:id/edit' do
+    @user = User.find_by_id(params[:id])
+    if is_logged_in?(session) && @user == current_user
+      erb :'/users/edit'
+    elsif is_logged_in?(session) && @user != current_user
+      flash[:error] = "This is not your profile to edit"
+      redirect '/posts'
+    else
+      flash[:error] = "Please log in"
+      redirect '/login'
+    end
+  end
+
+  post '/users/:id/edit' do
+    @user = User.find_by_id(params[:id])
+    if is_logged_in?(session) && @user.id == current_user.id
+      erb :'/users/edit'
+    elsif is_logged_in?(session) && @user.id != current_user.id
+    flash[:error] = "This is not your profile to edit"
+    redirect '/posts'
+    else
+      flash[:error] = "Please log in"
+      redirect '/login'
+    end
+  end
+
+
+  patch '/users/:id' do
+    @user = User.find_by_id(params[:id])
+    if params[:user_photo] != ""
+      @user.update(user_photo: params[:user_photo])
+      flash[:success] = "Profile photo successfully updated!"
+      redirect "/users/#{@user.id}"
+    else
+      flash[:error] = "Your profile did not update correctly"
+      redirect "/users/#{@user.id}/edit"
+    end
   end
 
 end
