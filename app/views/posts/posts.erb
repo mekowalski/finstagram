@@ -14,7 +14,7 @@
 
     <h2>Recent Posts</h2>
     <% @posts.each do |post| %>
-      <a href="/users/<%= post.user.slug %>"><%= post.user.username%></a>
+      <a href="/users/<%= post.user.id %>"><%= post.user.username%></a>
       <br><br>
 
       <a href="/posts/<%= post.id %>"><%= post.post_photo %></a>
