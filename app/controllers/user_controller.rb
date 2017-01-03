@@ -46,11 +46,13 @@ class UserController < ApplicationController
   end
 
   get '/users/:id' do
+    # binding.pry
     @user = User.find_by_id(params[:id])
-    if @user && @user == current_user
+    if @user
+      # && @user == current_user
       erb :'/users/users'
     else
-      redirect '/posts'
+      "redirect somewhere"
     end
   end
 
