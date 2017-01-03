@@ -9,7 +9,8 @@
     <%if @user.user_photo%>
       <%=@user.user_photo%>
     <%end%>
-
+    <br><br>
+    
     <% posts = @user.posts.sort_by {|post| post.id }.reverse %>
     <% posts.each do |post| %>
     <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
@@ -19,6 +20,7 @@
     <p><%= post.caption %></p>
     <% end %>
     <br><br>
+
 
     <form action="/users/<%= @user.id%>/edit" method="post">
       <input type="hidden" name="_method" value="get">
