@@ -7,10 +7,10 @@
   <body>
     <h1><%= @user.username %>'s Profile</h1>
     <%if @user.user_photo%>
-      <%=@user.user_photo%>
+      <%= @user.user_photo%>
     <%end%>
     <br><br>
-    
+
     <% posts = @user.posts.sort_by {|post| post.id }.reverse %>
     <% posts.each do |post| %>
     <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>

@@ -2,7 +2,7 @@ class PostController < ApplicationController
 
   get '/posts' do
     if is_logged_in?(session)
-      @posts = Post.all
+      @posts = Post.all.sort_by {|post| post.id}.reverse
       erb :'/posts/posts'
     else
       flash[:error] = "Please log in"
