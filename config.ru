@@ -8,3 +8,4 @@ run ApplicationController
 use Rack::MethodOverride
 use PostController
 use UserController
+use UploadController
