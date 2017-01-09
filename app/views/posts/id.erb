@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1><% if @post.user == current_user %>Your Post<% else %><%= @post.user.username %><% end %> posted:</h1>
-    <br><br>
+<h1><% if @post.user == current_user %>You<% else %><%= @post.user.username %><% end %> posted:</h1>
+<br><br>
 
-      <a href="/posts/<%= @post.id %>"><%= @post.post_photo %></a>
-      <p><%= @post.caption %></p>
-      <br><br>
+  <img src="/images/post/<%= @post.post_photo %>" alt="">
+  <!-- <a href="/posts/<%= @post.id %>"><%= @post.post_photo %></a> -->
+  <p><%= @post.caption %></p>
+  <br><br>
 
-      <% if @post.user == current_user %><% else %><% end %>
-      <form class="" action="/posts/<%= @post.id%>/edit" method="post">
-        <input type="hidden" name="_method" value="edit">
-        <input type="submit" name="" value="Edit Post">
-        <br><br>
-      </form>
-
-      <form class="" action="/posts/<%= @post.id%>/delete" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="submit" name="" value="Delete Post">
-      </form>
-
-  </body>
-</html>
+  <% if @post.user == current_user %><% else %><% end %>
+  <form class="" action="/posts/<%= @post.id%>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" name="" value="Delete Post">
+  </form>

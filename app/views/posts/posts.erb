@@ -1,13 +1,14 @@
-    <h1>Hello, <%= current_user.username %></h1>
-    <a href="/posts/new">Create New Post</a>
-    <br><br>
+<h1>Hello, <%= current_user.username %></h1>
+<a href="/posts/new">Create New Post</a>
+<br><br>
 
-    <h2>Recent Posts</h2>
-    <% @posts.each do |post| %>
-      <a href="/users/<%= post.user.id %>"><%= post.user.username%></a>
-      <br><br>
+<h2>Recent Posts</h2>
+<% @posts.each do |post| %>
+  <a href="/users/<%= post.user.id %>"><%= post.user.username%></a>
+  <br><br>
 
-      <img src="/images/post/<%= post.post_photo %>" alt="">
-      <!-- <a href="/posts/<%= post.id %>"><%= post.post_photo %></a> -->
-      <p><%= post.caption %></p>
-    <% end %>
+  <img src="/images/post/<%= post.post_photo %>" alt="">
+  <br>
+  <a href="/posts/<%= post.id%>"><%= post.caption %></a>
+  <br><br>
+<% end %>

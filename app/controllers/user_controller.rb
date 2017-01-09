@@ -30,17 +30,13 @@ class UserController < ApplicationController
   post '/signup' do
     if params.none? {|k, v| v == ""}
       @user = User.create(username: params[:username], learn_handle: params[:learn_handle], password: params[:password])
-
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
-
       File.open("./public/images/profile/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-
       @user.user_photo = @filename
       @user.save
-
       session[:user_id] = @user.id
       flash[:success] = "Created successfully!"
       redirect '/posts'
@@ -57,10 +53,8 @@ class UserController < ApplicationController
   end
 
   get '/users/:id' do
-    # binding.pry
     @user = User.find_by_id(params[:id])
     if @user
-      # && @user == current_user
       erb :'/users/users'
     else
       "redirect somewhere"
@@ -98,13 +92,10 @@ class UserController < ApplicationController
     if params[:file]
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
-
       File.open("./public/images/profile/#{@filename}", 'wb') do |f|
         f.write(file.read)
       end
-
       @user.update(user_photo: @filename)
-
       flash[:success] = "Profile photo successfully updated!"
       redirect "/users/#{@user.id}"
     else

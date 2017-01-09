@@ -6,7 +6,11 @@
   </head>
   <body>
     <h1>Finstagram</h1>
+
+    <% if is_logged_in?(session) %>
     <a href="/logout">Log out</a> | <a href="/users/<%= current_user.id %>">My Profile</a> | <a href="/posts">Home</a>
+    <% end %>
+
     <% if flash.has?(:error) %>
     <p><%= flash[:error] %></p>
     <% elsif flash.has?(:success) %>

@@ -1,28 +1,25 @@
+<h1><%= @user.username.upcase %>'s Profile</h1>
+<%if @user.user_photo%>
+  <img src="/images/profile/<%= @user.user_photo %>" alt="">
+<%end%>
+<br><br>
 
-    <h1><%= @user.username.upcase %>'s Profile</h1>
-    <%if @user.user_photo%>
-      <img src="/images/profile/<%= @user.user_photo %>" alt="">
-    <%end%>
-    <br><br>
+<% posts = @user.posts.sort_by {|post| post.id }.reverse %>
+<% posts.each do |post| %>
+<br><br>
 
-    <% posts = @user.posts.sort_by {|post| post.id }.reverse %>
-    <% posts.each do |post| %>
-    <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
-    <br><br>
+<img src="/images/post/<%= post.post_photo %>" alt="">
+<br>
+<a href="/posts/<%= post.id%>"><%= post.caption %></a>
+<% end %>
+<br><br>
 
-    <img src="/images/post/<%= post.post_photo %>" alt="">
-    <!-- <a href="/posts/<%= post.id %>"><%= post.post_photo %></a> -->
-    <p><%= post.caption %></p>
-    <% end %>
-    <br><br>
+<form action="/users/<%= @user.id%>/edit" method="post">
+  <input type="hidden" name="_method" value="get">
+  <input type="submit" name="" value="Edit Profile Photo">
+</form>
 
-
-    <form action="/users/<%= @user.id%>/edit" method="post">
-      <input type="hidden" name="_method" value="get">
-      <input type="submit" name="" value="Edit Profile Photo">
-    </form>
-
-    <form action="/users/<%= @user.id%>/delete" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" name="" value="Delete Profile">
-    </form>
+<form action="/users/<%= @user.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete Profile">
+</form>
