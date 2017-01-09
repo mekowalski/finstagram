@@ -56,8 +56,6 @@ class UserController < ApplicationController
     @user = User.find_by_id(params[:id])
     if @user
       erb :'/users/users'
-    else
-      "redirect somewhere"
     end
   end
 
