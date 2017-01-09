@@ -96,7 +96,7 @@ class UserController < ApplicationController
         f.write(file.read)
       end
       @user.update(user_photo: @filename)
-      flash[:success] = "Profile photo successfully updated!"
+      flash[:success] = "Profile successfully updated!"
       redirect "/users/#{@user.id}"
     else
       flash[:error] = "Your profile did not update correctly"

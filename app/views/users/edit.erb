@@ -1,12 +1,9 @@
 <h1>Edit your Profile</h1>
 <form action="/users/<%= @user.id %>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="patch">
-  <label>Learn Handle </label>
-  <input type="text" name="learn_handle">
-  <br>
-  
   <label>Profile Photo </label>
   <input type="file" name="file" value="<%= @user.user_photo %>" required>
-  <br>
+  <br><br>
+
   <input type="submit" value="Update Profile">
 </form>
