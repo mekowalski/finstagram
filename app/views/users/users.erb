@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+
     <h1><%= @user.username.upcase %>'s Profile</h1>
     <%if @user.user_photo%>
-      <%= @user.user_photo%>
+      <img src="/images/profile/<%= @user.user_photo %>" alt="">
     <%end%>
     <br><br>
 
@@ -16,7 +10,8 @@
     <a href="/users/<%= post.user.slug %>"><%= post.user.username %></a>
     <br><br>
 
-    <a href="/posts/<%= post.id %>"><%= post.post_photo %></a>
+    <img src="/images/post/<%= post.post_photo %>" alt="">
+    <!-- <a href="/posts/<%= post.id %>"><%= post.post_photo %></a> -->
     <p><%= post.caption %></p>
     <% end %>
     <br><br>
@@ -31,5 +26,3 @@
       <input type="hidden" name="_method" value="delete">
       <input type="submit" name="" value="Delete Profile">
     </form>
-  </body>
-</html>

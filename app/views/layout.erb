@@ -5,6 +5,8 @@
     <title>Finstagram</title>
   </head>
   <body>
+    <h1>Finstagram</h1>
+    <a href="/logout">Log out</a> | <a href="/users/<%= current_user.id %>">My Profile</a> | <a href="/posts">Home</a>
     <% if flash.has?(:error) %>
     <p><%= flash[:error] %></p>
     <% elsif flash.has?(:success) %>

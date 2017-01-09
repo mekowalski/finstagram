@@ -8,9 +8,9 @@
     <h1>Create a new post</h1>
     <br><br>
 
-    <form action="/posts" method="post">
+    <form action="/posts" method="post" enctype="multipart/form-data">
       <label>Photo of Post :</label>
-      <input type="text" name="post_photo" value="">
+      <input type="file" name="file" value="">
       <br><br>
 
       <label>Caption: </label>

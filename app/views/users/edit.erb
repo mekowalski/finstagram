@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Edit your Profile</h1>
-    <form action="/users/<%= @user.id %>" method="post">
+<h1>Edit your Profile</h1>
+  <form action="/users/<%= @user.id %>" method="post" enctype="multipart/form-data">
       <input type="hidden" name="_method" value="patch">
-      <label>Profile Photo </label>
-      <input type="text" name="user_photo" value="<%= @user.user_photo %>">
-      <input type="submit" value="Update Profile">
-    </form>
-  </body>
-</html>
+    <label>Profile Photo </label>
+    <input type="file" name="file" value="<%= @user.user_photo %>" required>
+    <br>
+    <input type="submit" value="Update Profile">
+  </form>

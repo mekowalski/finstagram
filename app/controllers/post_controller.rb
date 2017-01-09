@@ -20,8 +20,19 @@ class PostController < ApplicationController
   end
 
   post '/posts' do
-    if params[:post_photo] && params[:caption] != ""
-      Post.create(post_photo: params[:post_photo], caption: params[:caption], user_id: session[:user_id])
+    if params[:file] && params[:caption] != ""
+      @post = Post.create(caption: params[:caption], user_id: session[:user_id])
+
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+
+      File.open("./public/images/post/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+
+      @post.post_photo = @filename
+      @post.save
+      # binding.pry
       flash[:success] = "Post successfully made!"
       redirect '/posts'
     else

@@ -29,8 +29,19 @@ class UserController < ApplicationController
 
   post '/signup' do
     if params.none? {|k, v| v == ""}
-      user = User.create(username: params[:username], learn_handle: params[:learn_handle], user_photo: params[:user_photo], password: params[:password])
-      session[:user_id] = user.id
+      @user = User.create(username: params[:username], learn_handle: params[:learn_handle], password: params[:password])
+
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+
+      File.open("./public/images/profile/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+
+      @user.user_photo = @filename
+      @user.save
+
+      session[:user_id] = @user.id
       flash[:success] = "Created successfully!"
       redirect '/posts'
     else
@@ -82,11 +93,18 @@ class UserController < ApplicationController
     end
   end
 
-
   patch '/users/:id' do
     @user = User.find_by_id(params[:id])
-    if params[:user_photo] != ""
-      @user.update(user_photo: params[:user_photo])
+    if params[:file]
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+
+      File.open("./public/images/profile/#{@filename}", 'wb') do |f|
+        f.write(file.read)
+      end
+
+      @user.update(user_photo: @filename)
+
       flash[:success] = "Profile photo successfully updated!"
       redirect "/users/#{@user.id}"
     else
