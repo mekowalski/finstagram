@@ -21,7 +21,7 @@ class UserController < ApplicationController
 
   get '/signup' do
     if !is_logged_in?(session)
-      erb :'/users/new'
+      erb :'/users/signup'
     else
       redirect '/posts'
     end
@@ -55,7 +55,7 @@ class UserController < ApplicationController
   get '/users/:id' do
     @user = User.find_by_id(params[:id])
     if @user
-      erb :'/users/users'
+      erb :'/users/id'
     end
   end
 

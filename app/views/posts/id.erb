@@ -1,7 +1,7 @@
 <h1><% if @post.user == current_user %>You<% else %><%= @post.user.username %><% end %> posted:</h1>
 <br><br>
 
-  <img src="/images/post/<%= @post.post_photo %>" alt="">
+  <img src="/images/post/<%= @post.post_photo %>" style="width:50%"alt="">
   <p><%= @post.caption %></p>
   <br><br>
 

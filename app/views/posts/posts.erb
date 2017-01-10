@@ -1,12 +1,15 @@
 <h1>Hello, <%= current_user.username %></h1>
-
 <h2>Recent Posts</h2>
-<% @posts.each do |post| %>
-  <a href="/users/<%= post.user.id %>"><%= post.user.username%></a>
-  <br><br>
 
-  <img src="/images/post/<%= post.post_photo %>" alt="">
-  <br>
-  <a href="/posts/<%= post.id%>"><%= post.caption %></a>
-  <br><br>
-<% end %>
+<div class="container-fluid bg-3 text-center">
+  <!-- <h3>Recent Posts</h3> -->
+  <% @posts.each do |post| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <a href="/users/<%= post.user.id %>"><%= post.user.username%></a><br>
+      <img src="/images/post/<%= post.post_photo%>" style="width:33%"><br>
+      <a href="/posts/<%= post.id%>"><%= post.caption %></a><br><br>
+    </div>
+  </div>
+  <% end %>
+</div><br>
