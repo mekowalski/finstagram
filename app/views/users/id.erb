@@ -3,6 +3,10 @@
 <%if @user.user_photo%>
   <img src="/images/profile/<%= @user.user_photo %>" style="width:15%" alt="">
 <%end%>
+<form action="/users/<%= @user.id%>/edit" method="post">
+  <input type="hidden" name="_method" value="get">
+  <input type="submit" name="" value="Edit Profile Photo">
+</form>
 <br><br>
 
 <h2><%= @user.username %>'s posts</h2>
@@ -11,14 +15,8 @@
   <% posts.each do |post| %>
   <div class="row">
     <div class="col-sm-3">
-      <img src="/images/post/<%= post.post_photo%>" style="width:33%"><br>
-      <a href="/posts/<%= post.id %>"><%= post.caption %></a><br><br>
+      <img src="/images/post/<%= post.post_photo%>" style="width:100%">
+      <a href="/posts/<%= post.id%>"><%= post.caption %></a>
     </div>
-  </div>
   <% end %>
 </div><br>
-
-<form action="/users/<%= @user.id%>/edit" method="post">
-  <input type="hidden" name="_method" value="get">
-  <input type="submit" name="" value="Edit Profile Photo">
-</form>
