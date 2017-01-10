@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  validates :username, :password_digest, presence: true
+  validates :username, :learn_handle, :password_digest, presence: true
 
   def self.find_by_slug(slug)
     self.all.find {|occurence| occurence.slug == slug}
