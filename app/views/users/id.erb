@@ -1,7 +1,7 @@
 <h1><%= @user.username.upcase %>'s Profile</h1>
 <p>learn.co/<%= @user.learn_handle %></p>
 <%if @user.user_photo%>
-  <img src="/images/profile/<%= @user.user_photo %>" style="width:15%" alt="">
+  <img src="/images/profile/<%= @user.user_photo %>" style="width:10%" class="img-circle" alt="">
 <%end%>
 <form action="/users/<%= @user.id%>/edit" method="post">
   <input type="hidden" name="_method" value="get">
