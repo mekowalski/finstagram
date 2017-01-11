@@ -29,7 +29,6 @@ class PostController < ApplicationController
       end
       @post.post_photo = @filename
       @post.save
-      # binding.pry
       flash[:success] = "Post successfully made!"
       redirect '/posts'
     else
