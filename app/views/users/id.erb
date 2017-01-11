@@ -1,12 +1,16 @@
 <h1><%= @user.username.upcase %>'s Profile</h1>
 <p>learn.co/<%= @user.learn_handle %></p>
-<%if @user.user_photo%>
+<% if @user.user_photo %>
   <img src="/images/profile/<%= @user.user_photo %>" style="width:10%" class="img-circle" alt="">
-<%end%>
+<% end %>
+
+<% if @user == current_user %>
 <form action="/users/<%= @user.id%>/edit" method="post">
   <input type="hidden" name="_method" value="get">
   <input type="submit" name="" value="Edit Profile Photo">
 </form>
+<% else @user != current_user %>
+<% end %>
 <br><br>
 
 <h2><%= @user.username %>'s posts</h2>

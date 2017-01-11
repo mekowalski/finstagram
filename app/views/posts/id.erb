@@ -5,8 +5,10 @@
   <p><%= @post.caption %></p>
   <br><br>
 
-  <% if @post.user == current_user %><% else %><% end %>
+  <% if @post.user == current_user %>
   <form class="" action="/posts/<%= @post.id%>/delete" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" name="" value="Delete Post">
   </form>
+  <% else @post.user != current_user%>
+  <% end %>

@@ -53,9 +53,6 @@ class PostController < ApplicationController
       post.delete
       flash[:success] = "Post removed"
       redirect '/posts'
-    elsif is_logged_in?(session) && post.user_id != current_user.id
-      flash[:error] = "This is not your post to delete"
-      redirect '/posts'
     else
       flash[:error] = "Please log in"
       redirect '/login'

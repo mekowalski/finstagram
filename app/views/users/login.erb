@@ -1,3 +1,9 @@
+<% if flash.has?(:error) %>
+<p><%= flash[:error] %></p>
+<% elsif flash.has?(:success) %>
+<p><%= flash[:success] %></p>
+<% end %>
+
 <h1>Login in to view Finstagram</h1>
 <form action="/login" method="post">
   <label>Username: </label>
