@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   get '/login' do
-    if !is_logged_in?(session)
+    if !is_logged_in?
       erb :'/users/login'
     else
       redirect '/posts'
@@ -20,7 +20,7 @@ class UserController < ApplicationController
   end
 
   get '/signup' do
-    if !is_logged_in?(session)
+    if !is_logged_in?
       erb :'/users/signup'
     else
       redirect '/posts'
@@ -28,14 +28,13 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    if params.none? {|k, v| v == ""}
-      @user = User.create(username: params[:username], learn_handle: params[:learn_handle], password: params[:password])
-      @user.save
+    @user = User.new(username: params[:username], learn_handle: params[:learn_handle], password: params[:password])
+    if @user.save
       session[:user_id] = @user.id
       flash[:success] = "Created successfully!"
       redirect '/posts'
     else
-      flash[:error] = "Unsuccessfully created."
+      flash[:error] = @user.errors.full_messages
       redirect '/signup'
     end
   end
@@ -55,7 +54,7 @@ class UserController < ApplicationController
 
   get '/users/:id/edit' do
     @user = User.find_by_id(params[:id])
-    if is_logged_in?(session) && @user == current_user
+    if is_logged_in? && @user == current_user
       erb :'/users/edit'
     else
       flash[:error] = "This is not your account to edit"
@@ -65,7 +64,7 @@ class UserController < ApplicationController
 
   post '/users/:id/edit' do
     @user = User.find_by_id(params[:id])
-    if is_logged_in?(session) && @user.id == current_user.id
+    if is_logged_in? && @user.id == current_user.id
       erb :'/users/edit'
     else
       flash[:error] = "This is not your account to edit"

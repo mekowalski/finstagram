@@ -53,7 +53,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
-            <% if is_logged_in?(session) %>
+            <% if is_logged_in? %>
             <li><a href="/posts">Home</a></li>
             <li><a href="/users/<%= current_user.id %>">My Profile</a></li>
             <li><a href="/posts/new">Create New Post</a></li>
